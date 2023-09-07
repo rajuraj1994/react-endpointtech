@@ -9,6 +9,9 @@ import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
+import AdminRoute from "./auth/AdminRoute";
+import Dashboard from "./admin/Dashboard";
 const MyRoute = () => {
   return (
     <Router>
@@ -21,8 +24,13 @@ const MyRoute = () => {
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
           <Route path="register" element={<Register />} />
+          <Route path="signin" element={<Login />} />
         </Route>
         <Route path="/*" element={<NotFound />} />
+        {/* admin routes */}
+        <Route path="/admin/" element={<AdminRoute />}>
+          <Route path='dashboard' element={<Dashboard />} />
+        </Route>
       </Routes>
     </Router>
   );

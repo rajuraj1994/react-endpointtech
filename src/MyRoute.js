@@ -12,6 +12,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AdminRoute from "./auth/AdminRoute";
 import Dashboard from "./admin/Dashboard";
+import AddProduct from "./admin/AddProduct";
+import AllProduct from "./admin/AllProduct";
 const MyRoute = () => {
   return (
     <Router>
@@ -30,6 +32,8 @@ const MyRoute = () => {
         {/* admin routes */}
         <Route path="/admin/" element={<AdminRoute />}>
           <Route path='dashboard' element={<Dashboard />} />
+          <Route path='addproduct' element={<AddProduct/>}/>
+          <Route path='products' element={<AllProduct/>}/>
         </Route>
       </Routes>
     </Router>

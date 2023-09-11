@@ -3,16 +3,39 @@ import axios from 'axios'
 import { FaTrash,FaEdit } from 'react-icons/fa'
 import { API_URL } from '../config'
 import { Link } from 'react-router-dom'
+import { ToastContainer,toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { isAuthenticated } from '../auth'
 
 const AllProduct = () => {
+    const {token}=isAuthenticated()
     const[products,setProducts]=useState([])
     useEffect(()=>{
         axios.get(`${API_URL}/api/productlist`)
         .then(res=>setProducts(res.data))
         .catch(err=>console.log(err))
     },[])
+    //delete product 
+    const deleteProduct=id=>{
+        const confirmed=window.confirm('Are you sure want to delete this product?')
+        if(confirmed){
+            axios.delete(`${API_URL}/api/deleteproduct/${id}`,{
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            })
+            .then(res=>{
+                toast.success('product deleted')
+                setProducts(products.filter(p=>p._id!==id))
+            })
+            .catch(err=>{
+                toast.error('failed to delete product')
+            })
+        }
+    }
   return (
     <>
+    <ToastContainer theme='colored' position='top-center'/>
     <div className="container">
         <div className="row d-flex justify-content-center">
             <div className="col-md-10">
@@ -38,8 +61,8 @@ const AllProduct = () => {
                                 <td><img src={`${API_URL}/${p.product_image}`} alt={p.product_name} width='100' /></td>
                                 <td>{p.category.category_name}</td>
                                 <td>
-                                    <Link to='#' className='btn btn-primary'><FaEdit/></Link>
-                                    <button className='btn btn-danger'><FaTrash/></button>
+                                    <Link to={`/admin/updateproduct/${p._id}`} className='btn btn-primary'><FaEdit/></Link>
+                                    <button className='btn btn-danger' onClick={()=>deleteProduct(p._id)}><FaTrash/></button>
                                 </td>
                             </tr>
                         ))}

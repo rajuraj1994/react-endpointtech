@@ -68,7 +68,7 @@ const UpdateProduct = () => {
             setError('')
         }
         catch(err){
-            setError(err.error)
+            err.response && setError(err.response.data.error)
             setSuccess(false)
         }
     }

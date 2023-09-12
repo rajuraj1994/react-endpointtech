@@ -19,7 +19,7 @@ const Login = () => {
     // handling the form 
     const handleSubmit=e=>{
         e.preventDefault()
-        setValues({...values})
+        // setValues({...values})
         // call the signin function 
         signin({email,password})
         .then(data=>{
@@ -41,15 +41,13 @@ const Login = () => {
     // to redirect user 
     const redirectUser=()=>{
         if(redirectTo){
+            let redirect='/profile'
             if(user && user.role===1){
-                return navigate('/admin/dashboard')
+                navigate('/admin/dashboard')
             }
             else{
-                return navigate('/profile')
+                navigate(redirect)
             }
-        }
-        else{
-            return navigate('/signin')
         }
     }
     return (

@@ -5,6 +5,7 @@ import Show from '../context/Show'
 import DataCounter from '../hooks/DataCounter'
 import Memo from '../hooks/Memo'
 import ParentComp from '../hooks/ParentComp'
+import TestNav from '../redux/TestNav'
 
 const About = () => {
   return (
@@ -18,6 +19,7 @@ const About = () => {
       <DataCounter />
       <Memo />
       <ParentComp />
+      <TestNav />
     </>
   )
 }

@@ -3,17 +3,22 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import RatingStar from '../components/RatingStar'
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../redux/actions/cartAction';
 
 const ProductDetails = () => {
     const [product, setProduct]=useState({})
     const params=useParams()
     const pid= params.productId
+    const dispatch=useDispatch()
+
     useEffect(()=>{
         axios.get(`https://fakestoreapi.com/products/${pid}`)
         .then(res=>setProduct(res.data))
         .catch(err=>console.log(err))
     },[pid])
+
     //handling cart submit
     const addToCart=()=>{
         const cartItems=JSON.parse(localStorage.getItem('cartItems')) || []
@@ -38,6 +43,11 @@ const ProductDetails = () => {
             toast.success(`${productItem.title} is added to Cart`)
         }
     }
+
+    const addCart=()=>{
+        dispatch(addItemToCart(params.productId))
+        toast.success('product is added to cart')
+    }
   return (
     <>
     <ToastContainer theme='colored' position='top-center'/>
@@ -58,7 +68,7 @@ const ProductDetails = () => {
         </>
         }
         <div className='my-3'>
-            <button className='btn btn-warning' onClick={addToCart}>Add to cart</button>
+            <button className='btn btn-warning' onClick={addCart}>Add to cart</button>
         </div>
     </div>
     </div>

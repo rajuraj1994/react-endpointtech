@@ -6,6 +6,7 @@ import DataCounter from '../hooks/DataCounter'
 import Memo from '../hooks/Memo'
 import ParentComp from '../hooks/ParentComp'
 import TestNav from '../redux/TestNav'
+import Test from '../Test'
 
 const About = () => {
   return (
@@ -20,6 +21,7 @@ const About = () => {
       <Memo />
       <ParentComp />
       <TestNav />
+      <Test/>
     </>
   )
 }

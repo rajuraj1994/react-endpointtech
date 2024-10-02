@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const Shipping = () => {
     const navigate=useNavigate()
     const countriesList=Object.values(countries)
+    // fetch shipping data from localstorage
     const shippingInfo=JSON.parse(localStorage.getItem('shippingInfo')) || {}
 
     const[shippingAddress1,setShippingAddress1]=useState(shippingInfo.shippingAddress1 || '')
